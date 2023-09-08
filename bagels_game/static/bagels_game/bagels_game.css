@@ -5,6 +5,9 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
+    background: linear-gradient(to top, rgba(202,120,211,255),rgba(241,201,152,255));
+    color: #333333;
+    margin-top: 5rem;
 }
 
 h1 {
