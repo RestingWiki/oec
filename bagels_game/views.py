@@ -61,29 +61,29 @@ def f_GetSecretNum():
     return result
 
 def f_GetClue(secret_num, user_guess):
-        # Make a black list to contain the clue
-        clue = []
+    # Make a black list to contain the clue
+    clue = []
 
-        # If the guess from player is correct
-        if user_guess == secret_num:
-            return '\nThat is a correct answer. Lucky guess😏!'
+    # If the guess from player is correct
+    if user_guess == secret_num:
+        return '\nThat is a correct answer. Lucky guess😏!'
 
-        # Checking the guess
-        for i in range(len(user_guess)):
-            # Correct number and index
-            if user_guess[i] == secret_num[i]:
-                clue.append('Fermi😮')
+    # Checking the guess
+    for i in range(len(user_guess)):
+        # Correct number and index
+        if user_guess[i] == secret_num[i]:
+            clue.append('Fermi😮')
 
-            # Correct number but wrong index
-            elif user_guess[i] in secret_num:
-                clue.append('Pico🤙')
+        # Correct number but wrong index
+        elif user_guess[i] in secret_num:
+            clue.append('Pico🤙')
 
-        # All answers are wrong
-        if len(clue) == 0:
-            return '  🔎The clue for U is: Bagels🥲'
+    # All answers are wrong
+    if len(clue) == 0:
+        return '  🔎The clue for U is: Bagels🥲'
 
-        # Sorting the clue list to make the game more difficult
-        clue.sort()
+    # Sorting the clue list to make the game more difficult
+    clue.sort()
 
-        # return clues as a string
-        return '  🔎The clue for U is: ' + ' '.join(clue)
+    # return clues as a string
+    return '  🔎The clue for U is: ' + ' '.join(clue)

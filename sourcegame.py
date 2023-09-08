@@ -1,10 +1,3 @@
-#
-# Project1_BagelsGame.py
-# Located at Python 3/SmallProjectTNMade_[LearnPy3]/TheBigBookOfSmallPythonProject/Project1_BagelsGame.py
-#
-# Created by Hà Tường Nguyên on 06/05/2023
-#
-
 from random import shuffle
 
 # Game setting

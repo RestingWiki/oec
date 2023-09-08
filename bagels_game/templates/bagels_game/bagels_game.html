@@ -1,26 +1,55 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <title>Bagels Game</title>
-</head>
-<body>
-    <h1>Bagels Game</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {% if game_over %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'bagels_game/bagels_game.css' %}">
+
+    <title>Bagels Game</title>
+  </head>
+
+  <body>
+    <h1 class="title">Bagels Game</h1>
+    <section class="game">
+      {% if game_over %}
         <p>{{ clues|join:"<br>" }}</p>
         <p>Total Guesses: {{ guess_count }}</p>
         <form action="{% url 'bagels_game' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Play Again">
+          {% csrf_token %}
+          <input type="submit" value="Play Again">
         </form>
-    {% else %}
+      {% else %}
         <p>Make a guess:</p>
+        <p>Total Guesses: {{ guess_count }}</p>
         <form action="{% url 'bagels_game' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="user_guess" required>
-            <input type="submit" value="Guess">
+          {% csrf_token %}
+          <input type="text" name="user_guess" required>
+          <input type="submit" value="Guess">
         </form>
-    {% endif %}
-</body>
+      {% endif %}
+    </section>
+  </body>
+
+<!--  <body>-->
+<!--    <h1 class="game_title">Bagels Game</h1>-->
+
+<!--    {% if game_over %}-->
+<!--      <p>{{ clues|join:"<br>" }}</p>-->
+<!--      <p>Total Guesses: {{ guess_count }}</p>-->
+<!--      <form action="{% url 'bagels_game' %}" method="post">-->
+<!--        {% csrf_token %}-->
+<!--        <input type="submit" value="Play Again">-->
+<!--      </form>-->
+<!--    {% else %}-->
+<!--      <p>Make a guess:</p>-->
+<!--      <form action="{% url 'bagels_game' %}" method="post">-->
+<!--        {% csrf_token %}-->
+<!--        <input type="text" name="user_guess" required>-->
+<!--        <input type="submit" value="Guess">-->
+<!--      </form>-->
+<!--    {% endif %}-->
+<!--  </body>-->
 </html>

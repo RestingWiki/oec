@@ -1,0 +1,23 @@
+body{
+    background: linear-gradient(to left, rgba(202,121,210,255), rgba(239,197,156,255));
+    display: block;
+    width: 300px;
+    margin-left: 200px;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 10px;
+}
+.title{
+    color: rgb(91, 255, 255);
+    font-weight: bolder;
+    display: block;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.game{
+    background-color: aliceblue;
+    border-radius: 5px;
+    width: 500px;
+    padding: 10px;
+}
