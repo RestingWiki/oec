@@ -2,15 +2,18 @@
 
 {% block content %}
   <h1>Author of this website</h1>
-  {% for post in posts %}
+  {% for author in authors %}
     <article class="media content-section">
       <div class="media-body">
+
         <div class="article-metadata">
-          <a class="mr-2" href="#"><h3 class="author"> {{ post.author }} </h3></a>
-          <small class="text-muted"> {{ post.job }} </small>
+          <a class="mr-2" href="{{ author.fb }}"><h3 class="author"> {{ author.author }} </h3></a>
+          <small class="text-muted"> <a href="{{ author.github }}">{{ author.job }}</a></small>
         </div>
-        <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-        <p class="article-content">{{ post.content }}</p>
+
+        <h2><a class="article-title" href="#">{{ author.position }}</a></h2>
+        <p class="article-content">{{ author.content }}</p>
+
       </div>
     </article>
   {% endfor %}

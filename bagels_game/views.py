@@ -4,6 +4,9 @@ from random import shuffle
 c_i_MAX_GUESS = 10
 c_i_NUM_DIGITS = 3
 
+def about(request):
+    return render(request, 'bagels_game/index.html')
+
 def bagels_game(request):
     # Lấy số bí mật
     secret_number = f_GetSecretNum()

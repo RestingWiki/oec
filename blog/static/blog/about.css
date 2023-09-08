@@ -1,0 +1,61 @@
+/* Định nghĩa font-face */
+@font-face {
+    font-family: "uns";
+    src: url(/font/uns.ttf);
+}
+
+/* Thiết lập nền cho body và font chữ chung */
+body {
+    background: linear-gradient(to top, rgba(202, 120, 211, 1), rgba(241, 201, 152, 1));
+    font-family: "uns", sans-serif; /* Sử dụng font chữ sau khi định nghĩa */
+    font-size: 18px; /* Giảm kích thước font chữ để trang trở nên dễ đọc hơn */
+    line-height: 1.6; /* Tăng khoảng cách dòng */
+    margin: 0; /* Loại bỏ khoảng lề mặc định của body */
+}
+
+/* Định dạng phần tiêu đề */
+.title {
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 30px 0;
+}
+
+/* Định dạng cho các liên kết */
+.link a:link {
+    display: block;
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    text-decoration: none;
+    color: rgb(237, 193, 132);
+    background-color: rgb(164, 54, 142);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu */
+}
+
+/* Hover state cho liên kết */
+.link a:hover {
+    background-color: rgb(237, 193, 132);
+    color: rgb(164, 54, 142);
+}
+
+/* Định dạng cho phần giới thiệu và nội dung */
+.intro, .content {
+    background-color: white;
+    padding: 20px;
+    width: 80%; /* Thay đổi kích thước phần giới thiệu và nội dung */
+    max-width: 600px; /* Giới hạn kích thước tối đa */
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+    border-radius: 10px;
+}
+
+/* Định dạng cho tiêu đề */
+.head {
+    color: rgb(10, 179, 201);
+    font-size: 24px; /* Tăng kích thước font chữ cho tiêu đề */
+    margin-bottom: 10px; /* Thêm khoảng cách dưới tiêu đề */
+}

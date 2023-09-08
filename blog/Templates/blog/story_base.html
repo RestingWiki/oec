@@ -1,0 +1,20 @@
+<!--Inheritance base-->
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="video-container">
+    <iframe src="{{ video }}" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+</div>
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="{{ link }}"><h3 class="head"> {{ subtitle }} </h3></a>
+      <small class="text-muted">(𝘝𝘪𝘦𝘵𝘯𝘢𝘮𝘦𝘴𝘦 𝘤𝘢𝘱𝘵𝘪𝘰𝘯 𝘣𝘦𝘭𝘰𝘸)</small>
+    </div>
+    <p class="article-content">{{ contentEng }}</p>
+    <hr>
+    <p class="article-content">{{ contentVie }}</p>
+  </div>
+</article>
+{% endblock content %}
+
