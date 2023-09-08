@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from random import shuffle
+from sourcegame import *
 
 c_i_MAX_GUESS = 10
 c_i_NUM_DIGITS = 3
@@ -8,43 +8,89 @@ def about(request):
     return render(request, 'bagels_game/index.html')
 
 def bagels_game(request):
-    # Lấy số bí mật
-    secret_number = f_GetSecretNum()
+    userGuess = request.POST.get('userGuess')
+    print(userGuess)
 
-    # Khởi tạo biến cho trạng thái trò chơi
-    game_over = False
-    clues = []
-    guess_count = 0
-
+    context = {
+        'userGuess': userGuess
+    }
     # Xử lý dữ liệu người dùng khi họ gửi form
-    if request.method == 'POST':
-        user_guess = request.POST.get('user_guess', '')
-        guess_count += 1
-
-        # Xử lý đoạn code kiểm tra đoán đúng/sai ở đây và thêm vào biến clues
-
-        if user_guess == secret_number:
-            # Xử lý khi đoán đúng
-            game_over = True
-            clues.append('That is a correct answer. Lucky guess! 🎉')
-        else:
-            # Xử lý khi đoán sai
-            clues.append(f_GetClue(secret_number, user_guess))
-
-        if guess_count >= c_i_MAX_GUESS:
-            # Xử lý khi người chơi hết lượt đoán
-            game_over = True
-            clues.append(f'The answer is: {secret_number}')
-            clues.append('You ran out of guesses. Better luck next time! 😔')
+    # if request.method == 'POST':
+    #     user_guess = request.POST.get('user_guess', '')
+    #     guess_count += 1
+    #
+    #     # Xử lý đoạn code kiểm tra đoán đúng/sai ở đây và thêm vào biến clues
+    #
+    #     if user_guess == secret_number:
+    #         # Xử lý khi đoán đúng
+    #         game_over = True
+    #         clues.append('That is a correct answer. Lucky guess! 🎉')
+    #     else:
+    #         # Xử lý khi đoán sai
+    #         clues.append(getClue(secret_number, user_guess))
+    #
+    #     if guess_count >= c_i_MAX_GUESS:
+    #         # Xử lý khi người chơi hết lượt đoán
+    #         game_over = True
+    #         clues.append(f'The answer is: {secret_number}')
+    #         clues.append('You ran out of guesses. Better luck next time! 😔')
 
     # Render template HTML và truyền dữ liệu cần thiết
-    return render(request, 'bagels_game/bagels_game.html', {
-        'game_over': game_over,
-        'clues': clues,
-        'guess_count': guess_count,
-    })
+    return render(request, 'bagels_game/bagels_game.html', context)
 
-def f_GetSecretNum():
+
+### GAME FUNCTION BELOW
+def main() -> None:
+    # Main loop of the game
+    while True:
+
+        # Create a secret number
+        s_answer = getSecretNum()
+
+        # Create a value for increment
+        i_timeGuess = 1
+
+        # Keyboard Interrupt
+        try:
+            # Loop of taking player guess; checking guess; providing clue
+            while i_timeGuess <= c_i_MAX_GUESS:
+                # Create a blank string for checking datatype
+                str_UserGuess = ''
+
+                # Take the guess from player and prevent wrong datatype
+                str_UserGuess = validateInput(str_UserGuess, i_timeGuess)
+
+                # Check the guess then show the clue to player
+                str_Clues = getClue(s_answer, str_UserGuess)  # Contain the clue
+
+                if str_UserGuess == s_answer:
+                    print(str_Clues + "\n")
+                    break
+                else:
+                    print(str_Clues + "\n")
+                    # Increase the TimeGuess value: Loop [while i_timeGuess <= c_i_MAX_GUESS:]
+                    i_timeGuess += 1
+
+                # If player ran out of guess
+                if i_timeGuess > c_i_MAX_GUESS:
+                    print(f"The answer is: {s_answer}")
+                    print('\nNon cái hand =))')
+                    print('Gà vcl🐣🐥🐔\n')
+
+        except KeyboardInterrupt:
+            print('U stop the game🛑!')
+
+        # Ask player want to play again?
+        if input("📍U want to play again🥰? (yes or no): ").lower().startswith('n'):
+            # End of the game
+            print('\nWHY U ARE LEAVING MEEEEEEEEEEEEEE🥹👉👈')
+            print('BYE BYE🥲\n')
+            break
+
+        print("\n🥰🥰🥰YESSSS DADDYYYYYYYY🥰🥰🥰\n")
+
+# Create a fx to make a secret number
+def getSecretNum() -> str:
     # Create a list of number
     numbers = list('0123456789')
 
@@ -60,7 +106,8 @@ def f_GetSecretNum():
 
     return result
 
-def f_GetClue(secret_num, user_guess):
+# Create a fx for checking the guess from player
+def getClue(secret_num: str, user_guess: str) -> str:
     # Make a black list to contain the clue
     clue = []
 
@@ -87,3 +134,15 @@ def f_GetClue(secret_num, user_guess):
 
     # return clues as a string
     return '  🔎The clue for U is: ' + ' '.join(clue)
+
+def validateInput(user_get: str, time_guess: int) -> str:
+    while (len(user_get) != c_i_NUM_DIGITS) or not (user_get.isdecimal()):
+        if (len(user_get) == c_i_NUM_DIGITS) or (user_get.isdecimal()):
+            print(f"📍Guess {time_guess}")
+            user_get = input("  👉")
+
+        else:
+            print(f"📍Guess {time_guess}")
+            user_get = input("  👉Make sure that U enter {} numbers only: ".format(c_i_NUM_DIGITS))
+
+    return str(user_get)

@@ -5,62 +5,39 @@ c_i_MAX_GUESS = 10
 c_i_NUM_DIGITS = 3
 
 # Main fx of the game
-def main():
-    # Print the introduction of the game
-    print(f'''
-            BAGELS, A BULLSHIT GAME, by HaTuongNguyen hatuongnguyen0107@hcmut.edu.vn, 
-            Reference-based on "The big book of small Python projects" - AL SWEIGART
-
-            I'm thinking of a {c_i_NUM_DIGITS}-digit number from 0 to 9 with NO REPEATED DIGITS.
-            Try to guess what it is. 
-
-            Here are some clues:
-            When I say:    That means:
-              Pico😮       One digit is correct but in the wrong position.
-              Fermi🤙      One digit is correct and in the right position.
-              Bagels🥲     No digit is correct.
-
-            For example, if the secret number was 248 and your guess was 843, the
-            clues would be Fermi Pico.\n''')
-
+def main() -> None:
     # Main loop of the game
     while True:
 
         # Create a secret number
-        s_answer = f_GetSecretNum()
+        s_answer = getSecretNum()
 
         # Create a value for increment
-        i_TimeGuess = 1
+        i_timeGuess = 1
 
         # Keyboard Interrupt
         try:
             # Loop of taking player guess; checking guess; providing clue
-            while i_TimeGuess <= c_i_MAX_GUESS:
+            while i_timeGuess <= c_i_MAX_GUESS:
                 # Create a blank string for checking datatype
                 str_UserGuess = ''
 
                 # Take the guess from player and prevent wrong datatype
-                while (len(str_UserGuess) != c_i_NUM_DIGITS) or not (str_UserGuess.isdecimal()):
-                    if (len(str_UserGuess) == c_i_NUM_DIGITS) or (str_UserGuess.isdecimal()):
-                        print(f"📍Guess {i_TimeGuess}")
-                        str_UserGuess = input("  👉")
-
-                    else:
-                        print(f"📍Guess {i_TimeGuess}")
-                        str_UserGuess = input("  👉Make sure that U enter {} numbers only: ".format(c_i_NUM_DIGITS))
+                str_UserGuess = validateInput(str_UserGuess, i_timeGuess)
 
                 # Check the guess then show the clue to player
-                str_Clues = f_GetClue(s_answer, str_UserGuess)  # Contain the clue
+                str_Clues = getClue(s_answer, str_UserGuess)  # Contain the clue
+
                 if str_UserGuess == s_answer:
                     print(str_Clues + "\n")
                     break
                 else:
                     print(str_Clues + "\n")
-                    # Increase the TimeGuess value: Loop [while i_TimeGuess <= c_i_MAX_GUESS:]
-                    i_TimeGuess += 1
+                    # Increase the TimeGuess value: Loop [while i_timeGuess <= c_i_MAX_GUESS:]
+                    i_timeGuess += 1
 
                 # If player ran out of guess
-                if i_TimeGuess > c_i_MAX_GUESS:
+                if i_timeGuess > c_i_MAX_GUESS:
                     print(f"The answer is: {s_answer}")
                     print('\nNon cái hand =))')
                     print('Gà vcl🐣🐥🐔\n')
@@ -77,9 +54,8 @@ def main():
 
         print("\n🥰🥰🥰YESSSS DADDYYYYYYYY🥰🥰🥰\n")
 
-
 # Create a fx to make a secret number
-def f_GetSecretNum():
+def getSecretNum() -> str:
     # Create a list of number
     numbers = list('0123456789')
 
@@ -95,9 +71,8 @@ def f_GetSecretNum():
 
     return result
 
-
 # Create a fx for checking the guess from player
-def f_GetClue(secret_num, user_guess):
+def getClue(secret_num: str, user_guess: str) -> str:
     # Make a black list to contain the clue
     clue = []
 
@@ -125,6 +100,17 @@ def f_GetClue(secret_num, user_guess):
     # return clues as a string
     return '  🔎The clue for U is: ' + ' '.join(clue)
 
+def validateInput(user_get: str, time_guess: int) -> str:
+    while (len(user_get) != c_i_NUM_DIGITS) or not (user_get.isdecimal()):
+        if (len(user_get) == c_i_NUM_DIGITS) or (user_get.isdecimal()):
+            print(f"📍Guess {time_guess}")
+            user_get = input("  👉")
+
+        else:
+            print(f"📍Guess {time_guess}")
+            user_get = input("  👉Make sure that U enter {} numbers only: ".format(c_i_NUM_DIGITS))
+
+    return str(user_get)
 
 if __name__ == "__main__":
     main()

@@ -12,25 +12,13 @@
   </head>
 
   <body>
-    <h1 class="title">Bagels Game</h1>
-    <section class="game">
-      {% if game_over %}
-        <p>{{ clues|join:"<br>" }}</p>
-        <p>Total Guesses: {{ guess_count }}</p>
-        <form action="{% url 'bagels_game' %}" method="post">
-          {% csrf_token %}
-          <input type="submit" value="Play Again">
-        </form>
-      {% else %}
-        <p>Make a guess:</p>
-        <p>Total Guesses: {{ guess_count }}</p>
-        <form action="{% url 'bagels_game' %}" method="post">
-          {% csrf_token %}
-          <input type="text" name="user_guess" required>
-          <input type="submit" value="Guess">
-        </form>
-      {% endif %}
-    </section>
+    <form method="post">
+      {% csrf_token %}
+      Enter your guess: <input type="text" name="userGuess">
+      <button type="submit">Submit</button>
+    </form>
+
+    <h1>{{userGuess}}</h1>
   </body>
 
 <!--  <body>-->
