@@ -1,6 +1,9 @@
 from django.shortcuts import render
 
 def home(request):
+    return render(request, 'blog/about.html', {'title': 'About'})
+
+def author(request):
     Nguyen_content = """Hello there, \
     I'm Ha Tuong Nguyen, currently a sophomore majoring in Computer Science at HCMUT. \
     I'm a member of OISP English Club, specifically in the Logistics team. 
@@ -23,6 +26,15 @@ def home(request):
     to get high results in studying). The greatest thing is that I met new wonderful friends  and other \
     great relationships. I have no regrets at all.
     """
+    Khoa_content = """My name is Nguyen Anh Khoa, and currently, I'm a Computer Science major, grappling with the \
+    challenges this field throws at me, particularly the intricate world of Mathematical Modeling. Although my history \
+    with OEC may not be as extensive as that of some of my fellow members, I've actively participated in various \
+    events, including the OISP International Festival 2023, Debate Battle MHX, and Study Tour.
+    Being a part of OEC has provided me with invaluable experiences, especially in terms of teamwork. Additionally, \
+    it has allowed me to make new friends, some of whom I may encounter while wandering on campus in the future. I do \
+    tend to maintain a low online profile, so if you happen to see something posted by our club, try to spot me!
+    """
+    Tam_content = """Tường Nguyên's friend"""
     authors = [
         {
             'author': '🐼Hà Tường Nguyên',
@@ -39,15 +51,29 @@ def home(request):
             'content': Anh_content,
             'fb': 'https://www.facebook.com/profile.php?id=100009112758992',
             'github': 'https://github.com/bad-chemist-is-coding',
-        }
+        },
+        {
+            'author': '🥝Nguyễn Anh Khoa',
+            'job': '💻Computer Science',
+            'position': 'OEC\'s Academic',
+            'content': Khoa_content,
+            'fb': 'https://www.facebook.com/bim.nguyen.1654',
+            'github': 'https://github.com/RestingWiki',
+        },
+        {
+            'author': '🦐Võ Thanh Tâm',
+            'job': '💻Computer Science',
+            'position': 'In Tường Nguyên heart',
+            'content': Tam_content,
+            'fb': 'https://tomdapchai.com/',
+            'github': 'https://github.com/tomdapchai',
+        },
     ]
     context = {
-        'authors': authors
+        'authors': authors,
+        'title': 'Author',
     }
     return render(request, 'blog/home.html', context)
-
-def about(request):
-    return render(request, 'blog/about.html', {'title': 'About'})
 
 def TheStoriesOfOEC_1(request):
     contentEng = """\
