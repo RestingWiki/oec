@@ -9,6 +9,7 @@ c_i_NUM_DIGITS = 3
 def index(request):
     return render(request, 'bagels_game/index.html')
 
+
 def bagels_game(request):
     if 'game_data' not in request.session:
         request.session['game_data'] = {
@@ -16,6 +17,8 @@ def bagels_game(request):
             'str_Clues': '',
             'time_guess': 1,
         }
+
+    game_data = request.session['game_data']
 
     if request.method == 'POST':
         if 'reset' in request.POST:
@@ -27,9 +30,7 @@ def bagels_game(request):
             return render(request, 'bagels_game/bagels_game.html', {'message': 'Game has been reset.'})
 
         user_guess = request.POST.get('userGuess')
-        game_data = request.session['game_data']
         s_answer = game_data['s_answer']
-        print(s_answer)
         str_Clues = getClue(s_answer, user_guess)
 
         if user_guess == s_answer:
@@ -39,6 +40,12 @@ def bagels_game(request):
         else:
             message = f'Guess {game_data["time_guess"]}: {user_guess} - {str_Clues}'
 
+        # Kiểm tra và khởi tạo 'guesses' nếu chưa tồn tại
+        if 'guesses' not in game_data:
+            game_data['guesses'] = []
+
+        # Cập nhật danh sách guesses
+        game_data['guesses'].append(f'Guess {game_data["time_guess"]}: {user_guess} - {str_Clues}')
         game_data['str_Clues'] += str_Clues + '\n'
         game_data['time_guess'] += 1
         request.session.modified = True
@@ -48,10 +55,12 @@ def bagels_game(request):
             'timeGuess': game_data['time_guess'],
             'message': message,
             'str_Clues': game_data['str_Clues'],
+            'guesses': game_data['guesses'],
         }
         return render(request, 'bagels_game/bagels_game.html', context)
     else:
         return render(request, 'bagels_game/bagels_game.html')
+
 
 def getSecretNum():
     numbers = list('0123456789')

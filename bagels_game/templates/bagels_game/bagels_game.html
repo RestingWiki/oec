@@ -4,7 +4,6 @@
     <title>Bagels Game</title>
 </head>
 <body>
-    <h1>Bagels Game</h1>
     <form method="post" action="{% url 'bagels_game' %}">
         {% csrf_token %}
         <label for="userGuess">Enter your guess:</label>
@@ -13,6 +12,13 @@
         <input type="submit" value="Submit">
         <input type="submit" name="reset" value="Reset Game">
     </form>
+
     <p>{{ message }}</p>
+    <p>Guesses:</p>
+    <ul>
+        {% for guess in guesses %}
+            <li>{{ guess }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
