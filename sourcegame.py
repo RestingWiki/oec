@@ -6,6 +6,21 @@ c_i_NUM_DIGITS = 3
 
 # Main fx of the game
 def main() -> None:
+    print(f'''\n
+            BAGELS, A BULLSHIT GAME, by HaTuongNguyen hatuongnguyen0107@hcmut.edu.vn, 
+            Reference-based on "The big book of small Python projects" - AL SWEIGART
+
+            I'm thinking of a {c_i_NUM_DIGITS}-digit number from 0 to 9 with NO REPEATED DIGITS.
+            Try to guess what it is. 
+
+            Here are some clues:
+            When I say:    That means:
+              Pico😮       One digit is correct but in the wrong position.
+              Fermi🤙      One digit is correct and in the right position.
+              Bagels🥲     No digit is correct.
+
+            For example, if the secret number was 248 and your guess was 843, the
+            clues would be Fermi Pico.\n''')
     # Main loop of the game
     while True:
 

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
-<head>
-    <title>Bagels Game</title>
-</head>
-<body>
-    <form method="post" action="{% url 'bagels_game' %}">
-        {% csrf_token %}
-        <label for="userGuess">Enter your guess:</label>
-        <input type="text" id="userGuess" name="userGuess">
-        <input type="hidden" name="timeGuess" value="{{ timeGuess }}">
-        <input type="submit" value="Submit">
-        <input type="submit" name="reset" value="Reset Game">
-    </form>
+    <head>
+        <title>Bagels Game</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'bagels_game/bagels_game.css' %}">
+    </head>
 
-    <p>{{ message }}</p>
-    <p>Guesses:</p>
-    <ul>
-        {% for guess in guesses %}
-            <li>{{ guess }}</li>
-        {% endfor %}
-    </ul>
-</body>
+    <body>
+        <form method="post" action="{% url 'bagels_game' %}">
+            {% csrf_token %}
+            <label for="userGuess">Enter your guess:</label>
+            <input type="text" id="userGuess" name="userGuess">
+            <input type="hidden" name="timeGuess" value="{{ timeGuess }}">
+            <input type="submit" value="Submit">
+            <input type="submit" name="reset" value="Reset Game">
+        </form>
+
+        <p>{{ message }}</p>
+        <p>Guesses:</p>
+        <ul>
+            {% for guess in guesses %}
+                <li>{{ guess }}</li>
+            {% endfor %}
+        </ul>
+    </body>
 </html>

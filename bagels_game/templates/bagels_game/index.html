@@ -1,10 +1,32 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
-<head>
-    <title>Bagels Game</title>
-</head>
-<body>
-    <h1>Welcome to the Bagels Game</h1>
-    <p><a href="{% url 'bagels_game' %}">Play Bagels</a></p>
-</body>
+    <head>
+        <title>Bagels Game</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'bagels_game/bagels_game.css' %}">
+    </head>
+
+    <body>
+        <h1>Welcome to the Bagels Game</h1>
+        <button onclick="window.location.href='{% url 'bagels_game' %}'">Play Bagels</button>
+
+        <p>BAGELS, A BULLSHIT GAME, by HaTuongNguyen hatuongnguyen0107@hcmut.edu.vn,
+        Reference-based on "The big book of small Python projects" - AL SWEIGART</p>
+
+        <p>I'm thinking of a {{ maxGuess }}-digit number from 0 to 9 with NO REPEATED DIGITS.
+        Try to guess what it is.</p>
+
+        <div class="clues-container">
+            <p class="clues-title">Here are some clues:</p>
+            <ul class="clues-list">
+                <li class="clues-item"><strong>Pico😮:</strong> One digit is correct but in the wrong position.</li>
+                <li class="clues-item"><strong>Fermi🤙:</strong> One digit is correct and in the right position.</li>
+                <li class="clues-item"><strong>Bagels🥲:</strong> No digit is correct.</li>
+            </ul>
+        </div>
+
+        <p>For example, if the secret number was 248 and your guess was 843, the
+        clues would be Fermi Pico.</p>
+    </body>
 </html>
