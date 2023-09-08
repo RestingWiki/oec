@@ -1,43 +1,18 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'bagels_game/bagels_game.css' %}">
-
+<html>
+<head>
     <title>Bagels Game</title>
-  </head>
-
-  <body>
-    <form method="post">
-      {% csrf_token %}
-      Enter your guess: <input type="text" name="userGuess">
-      <button type="submit">Submit</button>
+</head>
+<body>
+    <h1>Bagels Game</h1>
+    <form method="post" action="{% url 'bagels_game' %}">
+        {% csrf_token %}
+        <label for="userGuess">Enter your guess:</label>
+        <input type="text" id="userGuess" name="userGuess">
+        <input type="hidden" name="timeGuess" value="{{ timeGuess }}">
+        <input type="submit" value="Submit">
+        <input type="submit" name="reset" value="Reset Game">
     </form>
-
-    <h1>{{userGuess}}</h1>
-  </body>
-
-<!--  <body>-->
-<!--    <h1 class="game_title">Bagels Game</h1>-->
-
-<!--    {% if game_over %}-->
-<!--      <p>{{ clues|join:"<br>" }}</p>-->
-<!--      <p>Total Guesses: {{ guess_count }}</p>-->
-<!--      <form action="{% url 'bagels_game' %}" method="post">-->
-<!--        {% csrf_token %}-->
-<!--        <input type="submit" value="Play Again">-->
-<!--      </form>-->
-<!--    {% else %}-->
-<!--      <p>Make a guess:</p>-->
-<!--      <form action="{% url 'bagels_game' %}" method="post">-->
-<!--        {% csrf_token %}-->
-<!--        <input type="text" name="user_guess" required>-->
-<!--        <input type="submit" value="Guess">-->
-<!--      </form>-->
-<!--    {% endif %}-->
-<!--  </body>-->
+    <p>{{ message }}</p>
+</body>
 </html>
