@@ -16,16 +16,19 @@ def bagels_game(request):
             's_answer': getSecretNum(),
             'str_Clues': '',
             'time_guess': 1,
+            'guesses': [],  # Initialize the list of guesses
         }
 
     game_data = request.session['game_data']
 
     if request.method == 'POST':
         if 'reset' in request.POST:
+            # Reset the game data, including the list of guesses
             request.session['game_data'] = {
                 's_answer': getSecretNum(),
                 'str_Clues': '',
                 'time_guess': 1,
+                'guesses': [],
             }
             return render(request, 'bagels_game/bagels_game.html', {'message': 'Game has been reset.'})
 
@@ -39,10 +42,6 @@ def bagels_game(request):
             message = f'Game over. The correct answer was: {s_answer}'
         else:
             message = f'Guess {game_data["time_guess"]}: {user_guess} - {str_Clues}'
-
-        # Kiểm tra và khởi tạo 'guesses' nếu chưa tồn tại
-        if 'guesses' not in game_data:
-            game_data['guesses'] = []
 
         # Cập nhật danh sách guesses
         game_data['guesses'].append(f'Guess {game_data["time_guess"]}: {user_guess} - {str_Clues}')
