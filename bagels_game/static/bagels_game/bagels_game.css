@@ -8,12 +8,7 @@ body {
     background: linear-gradient(to top, rgba(202,120,211,255),rgba(241,201,152,255));
     color: #333333;
     margin-top: 5rem;
-}
-
-h1 {
-    text-align: center;
-    color: #333;
-    margin-top: 20px;
+    font-size: 16px;
 }
 
 p {
@@ -26,6 +21,18 @@ p {
     border-radius: 5px;
 }
 
+.guess-clue{
+  font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #5BE9F9;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-weight: bolder;
+}
+
 button {
     background-color: #0074d9;
     color: #fff;
@@ -33,6 +40,8 @@ button {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 30px;
+
 }
 
 button:hover {
